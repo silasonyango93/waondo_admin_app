@@ -1,0 +1,743 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg_modal_background"
+    android:paddingTop="24dp"
+    android:id="@+id/deposits_account_details_layout">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:background="@drawable/ic_icon_background"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="17dp"
+            android:gravity="center"
+            android:layout_height="wrap_content">
+
+            <View
+                android:background="@drawable/ic_wallet"
+                android:layout_width="22dp"
+                android:layout_height="22dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:layout_width="match_parent"
+            android:layout_marginRight="17dp"
+            android:layout_marginLeft="17dp"
+            android:layout_height="45dp">
+
+            <LinearLayout
+                android:layout_weight=".4"
+                android:layout_width="wrap_content"
+                android:gravity="left"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="#a2a2a2"
+                    android:lineSpacingExtra="7sp"
+                    android:fontFamily="@font/lato_regular"
+                    android:lineHeight="21sp"
+                    android:layout_gravity="center_vertical"
+                    android:text="Student Name"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_weight=".6"
+                android:layout_width="wrap_content"
+                android:gravity="right"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_student_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/lato_regular"
+                    android:lineHeight="24sp"
+                    android:text="......."/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:background="#f0f1f1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:layout_width="match_parent"
+            android:layout_marginRight="17dp"
+            android:layout_marginLeft="17dp"
+            android:layout_height="45dp">
+
+            <LinearLayout
+                android:layout_weight=".4"
+                android:layout_width="wrap_content"
+                android:gravity="left"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="#a2a2a2"
+                    android:lineSpacingExtra="7sp"
+                    android:fontFamily="@font/lato_regular"
+                    android:lineHeight="21sp"
+                    android:layout_gravity="center_vertical"
+                    android:text="Admission Number"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_weight=".6"
+                android:layout_width="wrap_content"
+                android:gravity="right"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_admission_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/lato_regular"
+                    android:lineHeight="24sp"
+                    android:text="......."/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:background="#f0f1f1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:layout_width="match_parent"
+            android:layout_marginRight="17dp"
+            android:layout_marginLeft="17dp"
+            android:layout_height="45dp">
+
+            <LinearLayout
+                android:layout_weight=".4"
+                android:layout_width="wrap_content"
+                android:gravity="left"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="#a2a2a2"
+                    android:lineSpacingExtra="7sp"
+                    android:fontFamily="@font/lato_regular"
+                    android:lineHeight="21sp"
+                    android:layout_gravity="center_vertical"
+                    android:text="Class"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_weight=".6"
+                android:layout_width="wrap_content"
+                android:gravity="right"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_class"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/lato_regular"
+                    android:lineHeight="24sp"
+                    android:text="......."/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:background="#f0f1f1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:layout_width="match_parent"
+            android:layout_marginRight="17dp"
+            android:layout_marginLeft="17dp"
+            android:layout_height="45dp">
+
+            <LinearLayout
+                android:layout_weight=".4"
+                android:layout_width="wrap_content"
+                android:gravity="left"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="#a2a2a2"
+                    android:lineSpacingExtra="7sp"
+                    android:fontFamily="@font/lato_regular"
+                    android:lineHeight="21sp"
+                    android:layout_gravity="center_vertical"
+                    android:text="Installment Amount"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_weight=".6"
+                android:layout_width="wrap_content"
+                android:gravity="right"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_installment_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/lato_regular"
+                    android:lineHeight="24sp"
+                    android:text="......."/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:background="#f0f1f1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:layout_width="match_parent"
+            android:layout_marginRight="17dp"
+            android:layout_marginLeft="17dp"
+            android:layout_height="45dp">
+
+            <LinearLayout
+                android:layout_weight=".4"
+                android:layout_width="wrap_content"
+                android:gravity="left"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="#a2a2a2"
+                    android:lineSpacingExtra="7sp"
+                    android:fontFamily="@font/lato_regular"
+                    android:lineHeight="21sp"
+                    android:layout_gravity="center_vertical"
+                    android:text="Staff"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_weight=".6"
+                android:layout_width="wrap_content"
+                android:gravity="right"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_staff"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/lato_regular"
+                    android:lineHeight="24sp"
+                    android:text="......."/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:background="#f0f1f1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:layout_width="match_parent"
+            android:layout_marginRight="17dp"
+            android:layout_marginLeft="17dp"
+            android:layout_height="45dp">
+
+            <LinearLayout
+                android:layout_weight=".4"
+                android:layout_width="wrap_content"
+                android:gravity="left"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="#a2a2a2"
+                    android:lineSpacingExtra="7sp"
+                    android:fontFamily="@font/lato_regular"
+                    android:lineHeight="21sp"
+                    android:layout_gravity="center_vertical"
+                    android:text="Description"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_weight=".6"
+                android:layout_width="wrap_content"
+                android:gravity="right"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/lato_regular"
+                    android:lineHeight="24sp"
+                    android:text="......."/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:background="#f0f1f1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:layout_width="match_parent"
+            android:layout_marginRight="17dp"
+            android:layout_marginLeft="17dp"
+            android:layout_height="45dp">
+
+            <LinearLayout
+                android:layout_weight=".4"
+                android:layout_width="wrap_content"
+                android:gravity="left"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="#a2a2a2"
+                    android:lineSpacingExtra="7sp"
+                    android:fontFamily="@font/lato_regular"
+                    android:lineHeight="21sp"
+                    android:layout_gravity="center_vertical"
+                    android:text="Transaction Date"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_weight=".6"
+                android:layout_width="wrap_content"
+                android:gravity="right"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_transaction_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/lato_regular"
+                    android:lineHeight="24sp"
+                    android:text="......."/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:background="#f0f1f1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:layout_width="match_parent"
+            android:layout_marginRight="17dp"
+            android:layout_marginLeft="17dp"
+            android:layout_height="45dp">
+
+            <LinearLayout
+                android:layout_weight=".4"
+                android:layout_width="wrap_content"
+                android:gravity="left"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="#a2a2a2"
+                    android:lineSpacingExtra="7sp"
+                    android:fontFamily="@font/lato_regular"
+                    android:lineHeight="21sp"
+                    android:layout_gravity="center_vertical"
+                    android:text="Previous Term Balance"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_weight=".6"
+                android:layout_width="wrap_content"
+                android:gravity="right"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_prev_term_balance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/lato_regular"
+                    android:lineHeight="24sp"
+                    android:text="......."/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+        <View
+            android:background="#f0f1f1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:layout_width="match_parent"
+            android:layout_marginRight="17dp"
+            android:layout_marginLeft="17dp"
+            android:layout_height="45dp">
+
+            <LinearLayout
+                android:layout_weight=".4"
+                android:layout_width="wrap_content"
+                android:gravity="left"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="#a2a2a2"
+                    android:lineSpacingExtra="7sp"
+                    android:fontFamily="@font/lato_regular"
+                    android:lineHeight="21sp"
+                    android:layout_gravity="center_vertical"
+                    android:text="Previous Annual Balance"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_weight=".6"
+                android:layout_width="wrap_content"
+                android:gravity="right"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_prev_annual_balance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/lato_regular"
+                    android:lineHeight="24sp"
+                    android:text="......."/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <View
+            android:background="#f0f1f1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:layout_width="match_parent"
+            android:layout_marginRight="17dp"
+            android:layout_marginLeft="17dp"
+            android:layout_height="45dp">
+
+            <LinearLayout
+                android:layout_weight=".4"
+                android:layout_width="wrap_content"
+                android:gravity="left"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="#a2a2a2"
+                    android:lineSpacingExtra="7sp"
+                    android:fontFamily="@font/lato_regular"
+                    android:lineHeight="21sp"
+                    android:layout_gravity="center_vertical"
+                    android:text="Previous Total"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_weight=".6"
+                android:layout_width="wrap_content"
+                android:gravity="right"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_prev_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/lato_regular"
+                    android:lineHeight="24sp"
+                    android:text="......."/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <View
+            android:background="#f0f1f1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:layout_width="match_parent"
+            android:layout_marginRight="17dp"
+            android:layout_marginLeft="17dp"
+            android:layout_height="45dp">
+
+            <LinearLayout
+                android:layout_weight=".4"
+                android:layout_width="wrap_content"
+                android:gravity="left"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="#a2a2a2"
+                    android:lineSpacingExtra="7sp"
+                    android:fontFamily="@font/lato_regular"
+                    android:lineHeight="21sp"
+                    android:layout_gravity="center_vertical"
+                    android:text="Next Term Balance"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_weight=".6"
+                android:layout_width="wrap_content"
+                android:gravity="right"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_next_term_balance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/lato_regular"
+                    android:lineHeight="24sp"
+                    android:text="......."/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <View
+            android:background="#f0f1f1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:layout_width="match_parent"
+            android:layout_marginRight="17dp"
+            android:layout_marginLeft="17dp"
+            android:layout_height="45dp">
+
+            <LinearLayout
+                android:layout_weight=".4"
+                android:layout_width="wrap_content"
+                android:gravity="left"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="#a2a2a2"
+                    android:lineSpacingExtra="7sp"
+                    android:fontFamily="@font/lato_regular"
+                    android:lineHeight="21sp"
+                    android:layout_gravity="center_vertical"
+                    android:text="Next Annual Balance"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_weight=".6"
+                android:layout_width="wrap_content"
+                android:gravity="right"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_next_annual_balance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/lato_regular"
+                    android:lineHeight="24sp"
+                    android:text="......."/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:background="#f0f1f1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:layout_width="match_parent"
+            android:layout_marginRight="17dp"
+            android:layout_marginLeft="17dp"
+            android:layout_height="45dp">
+
+            <LinearLayout
+                android:layout_weight=".4"
+                android:layout_width="wrap_content"
+                android:gravity="left"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="#a2a2a2"
+                    android:lineSpacingExtra="7sp"
+                    android:fontFamily="@font/lato_regular"
+                    android:lineHeight="21sp"
+                    android:layout_gravity="center_vertical"
+                    android:text="Next Total"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_weight=".6"
+                android:layout_width="wrap_content"
+                android:gravity="right"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_next_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="#000000"
+                    android:lineSpacingExtra="8sp"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/lato_regular"
+                    android:lineHeight="24sp"
+                    android:text="......."/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:background="#f0f1f1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="42dp"/>
+
+
+
+
+    </LinearLayout>
+</ScrollView>

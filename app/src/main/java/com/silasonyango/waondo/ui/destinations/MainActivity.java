@@ -46,6 +46,8 @@ public class MainActivity extends AppCompatActivity implements TransactionsListA
     View noTransactionsPlaceholder;
     private AlertDialog adMenuDialog;
     private AlertDialog adSelectDate;
+    private AlertDialog adSelectDateRange;
+    private AlertDialog adTransactionDetails;
     private int mYear, mMonth, mDay;
     private String selectedTransactionDate = null;
     private String startDate = null;
@@ -97,7 +99,10 @@ public class MainActivity extends AppCompatActivity implements TransactionsListA
                                     transactionsResponseDto.getStaff(),
                                     transactionsResponseDto.getStudentName(),
                                     transactionsResponseDto.getInstallmentAmount(),
-                                    transactionsResponseDto.getCarryForwardAmount()
+                                    transactionsResponseDto.getCarryForwardAmount(),
+                                    transactionsResponseDto.getAdmissionNo(),
+                                    transactionsResponseDto.getAcademicClassLevelName(),
+                                    transactionsResponseDto.getClassStreamName()
                             ));
                         }
                         TransactionsListAdapter transactionsListAdapter = new TransactionsListAdapter(getBaseContext(),R.layout.transaction_item,transactionsItemModelList, MainActivity.this);
@@ -148,7 +153,10 @@ public class MainActivity extends AppCompatActivity implements TransactionsListA
                                     transactionsResponseDto.getStaff(),
                                     transactionsResponseDto.getStudentName(),
                                     transactionsResponseDto.getInstallmentAmount(),
-                                    transactionsResponseDto.getCarryForwardAmount()
+                                    transactionsResponseDto.getCarryForwardAmount(),
+                                    transactionsResponseDto.getAdmissionNo(),
+                                    transactionsResponseDto.getAcademicClassLevelName(),
+                                    transactionsResponseDto.getClassStreamName()
                             ));
                         }
                         TransactionsListAdapter transactionsListAdapter = new TransactionsListAdapter(getBaseContext(),R.layout.transaction_item,transactionsItemModelList, MainActivity.this);
@@ -334,7 +342,7 @@ public class MainActivity extends AppCompatActivity implements TransactionsListA
         tvSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                adSelectDate.cancel();
+                adSelectDateRange.cancel();
                 fetchTransactionsByDateRange(startDate,endDate);
             }
         });
@@ -345,17 +353,67 @@ public class MainActivity extends AppCompatActivity implements TransactionsListA
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setView(v);
         builder.setCancelable(true);
-        adSelectDate = builder.create();
-        adSelectDate.setCancelable(true);
-        adSelectDate.setCanceledOnTouchOutside(true);
-        adSelectDate.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        adSelectDate.show();
-        Window window = adSelectDate.getWindow();
+        adSelectDateRange = builder.create();
+        adSelectDateRange.setCancelable(true);
+        adSelectDateRange.setCanceledOnTouchOutside(true);
+        adSelectDateRange.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        adSelectDateRange.show();
+        Window window = adSelectDateRange.getWindow();
         window.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
     }
 
     @Override
     public void onTransactionItemClicked(TransactionsItemModel transactionsItemModel) {
+        inflateTransactionDetailsModal(transactionsItemModel);
+    }
 
+    public void inflateTransactionDetailsModal(TransactionsItemModel transactionsItemModel) {
+        LayoutInflater inflater = (LayoutInflater)getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View inflatedView = inflater.inflate(R.layout.transaction_details_layout, null);
+
+        TextView tvStudentName = inflatedView.findViewById(R.id.tv_student_name);
+        TextView tvAdmissionNumber = inflatedView.findViewById(R.id.tv_admission_number);
+        TextView tvClass = inflatedView.findViewById(R.id.tv_class);
+        TextView tvInstallmentAmount = inflatedView.findViewById(R.id.tv_installment_amount);
+        TextView tvStaff = inflatedView.findViewById(R.id.tv_staff);
+        TextView tvDescription = inflatedView.findViewById(R.id.tv_description);
+        TextView tvTransactionDate = inflatedView.findViewById(R.id.tv_transaction_date);
+        TextView tvPrevTermBalance = inflatedView.findViewById(R.id.tv_prev_term_balance);
+        TextView tvPrevAnnualBalance = inflatedView.findViewById(R.id.tv_prev_annual_balance);
+        TextView tvPrevTotal = inflatedView.findViewById(R.id.tv_prev_total);
+        TextView tvNextTermBalance = inflatedView.findViewById(R.id.tv_next_term_balance);
+        TextView tvNextAnnualBalance = inflatedView.findViewById(R.id.tv_next_annual_balance);
+        TextView tvNextTotal = inflatedView.findViewById(R.id.tv_next_total);
+
+        tvStudentName.setText(transactionsItemModel.getStudentName());
+        tvInstallmentAmount.setText(String.valueOf("KES " + Util.formatToCommaSeperatedValue(transactionsItemModel.getInstallmentAmount())));
+        tvStaff.setText(transactionsItemModel.getStaff());
+        tvDescription.setText(transactionsItemModel.getTransactionDescription());
+        tvTransactionDate.setText(Util.convertToUserFriendlyDate(transactionsItemModel.getTransactionDate(),"yyyy-MM-dd"));
+        tvPrevTermBalance.setText(String.valueOf(transactionsItemModel.getPreviousTermBalance()));
+        tvPrevAnnualBalance.setText(String.valueOf(transactionsItemModel.getPreviousAnnualBalance()));
+        tvPrevTotal.setText(String.valueOf(transactionsItemModel.getPreviousTotal()));
+        tvNextTermBalance.setText(String.valueOf(transactionsItemModel.getNextTermBalance()));
+        tvNextAnnualBalance.setText(String.valueOf(transactionsItemModel.getNextAnnualBalance()));
+        tvNextTotal.setText(String.valueOf(transactionsItemModel.getNextTotal()));
+        tvAdmissionNumber.setText(transactionsItemModel.getAdmissionNo());
+        tvClass.setText(transactionsItemModel.getAcademicClassLevelName() + " " + transactionsItemModel.getClassStreamName());
+
+        openTransactionDetailsModal(inflatedView);
+    }
+
+    public void openTransactionDetailsModal(View v) {
+        int height = (int) (getResources().getDisplayMetrics().heightPixels * 0.75);
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setView(v);
+        builder.setCancelable(true);
+        adTransactionDetails = builder.create();
+        adTransactionDetails.setCancelable(true);
+        adTransactionDetails.setCanceledOnTouchOutside(true);
+        adTransactionDetails.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialogBottom(adTransactionDetails);
+        adTransactionDetails.show();
+        Window window = adTransactionDetails.getWindow();
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, height);
     }
 }

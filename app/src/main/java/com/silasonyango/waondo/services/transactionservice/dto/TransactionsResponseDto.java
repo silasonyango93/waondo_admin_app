@@ -45,7 +45,16 @@ public class TransactionsResponseDto {
     @SerializedName("carryForwardAmount")
     private double carryForwardAmount;
 
-    public TransactionsResponseDto(int transactionId, int studentId, String transactionDescription, double previousTermBalance, double previousAnnualBalance, double previousTotal, double nextTermBalance, double nextAnnualBalance, double nextTotal, String transactionDate, String staff, String studentName, double installmentAmount, double carryForwardAmount) {
+    @SerializedName("admissionNo")
+    private String admissionNo;
+
+    @SerializedName("academicClassLevelName")
+    private String academicClassLevelName;
+
+    @SerializedName("classStreamName")
+    private String classStreamName;
+
+    public TransactionsResponseDto(int transactionId, int studentId, String transactionDescription, double previousTermBalance, double previousAnnualBalance, double previousTotal, double nextTermBalance, double nextAnnualBalance, double nextTotal, String transactionDate, String staff, String studentName, double installmentAmount, double carryForwardAmount, String admissionNo, String academicClassLevelName, String classStreamName) {
         this.transactionId = transactionId;
         this.studentId = studentId;
         this.transactionDescription = transactionDescription;
@@ -60,6 +69,9 @@ public class TransactionsResponseDto {
         this.studentName = studentName;
         this.installmentAmount = installmentAmount;
         this.carryForwardAmount = carryForwardAmount;
+        this.admissionNo = admissionNo;
+        this.academicClassLevelName = academicClassLevelName;
+        this.classStreamName = classStreamName;
     }
 
     public int getTransactionId() {
@@ -172,5 +184,29 @@ public class TransactionsResponseDto {
 
     public void setCarryForwardAmount(double carryForwardAmount) {
         this.carryForwardAmount = carryForwardAmount;
+    }
+
+    public String getAdmissionNo() {
+        return admissionNo;
+    }
+
+    public void setAdmissionNo(String admissionNo) {
+        this.admissionNo = admissionNo;
+    }
+
+    public String getAcademicClassLevelName() {
+        return academicClassLevelName;
+    }
+
+    public void setAcademicClassLevelName(String academicClassLevelName) {
+        this.academicClassLevelName = academicClassLevelName;
+    }
+
+    public String getClassStreamName() {
+        return classStreamName;
+    }
+
+    public void setClassStreamName(String classStreamName) {
+        this.classStreamName = classStreamName;
     }
 }
