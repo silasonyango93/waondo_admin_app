@@ -45,6 +45,23 @@ public class TransactionsResponseDto {
     @SerializedName("carryForwardAmount")
     private double carryForwardAmount;
 
+    public TransactionsResponseDto(int transactionId, int studentId, String transactionDescription, double previousTermBalance, double previousAnnualBalance, double previousTotal, double nextTermBalance, double nextAnnualBalance, double nextTotal, String transactionDate, String staff, String studentName, double installmentAmount, double carryForwardAmount) {
+        this.transactionId = transactionId;
+        this.studentId = studentId;
+        this.transactionDescription = transactionDescription;
+        this.previousTermBalance = previousTermBalance;
+        this.previousAnnualBalance = previousAnnualBalance;
+        this.previousTotal = previousTotal;
+        this.nextTermBalance = nextTermBalance;
+        this.nextAnnualBalance = nextAnnualBalance;
+        this.nextTotal = nextTotal;
+        this.transactionDate = transactionDate;
+        this.staff = staff;
+        this.studentName = studentName;
+        this.installmentAmount = installmentAmount;
+        this.carryForwardAmount = carryForwardAmount;
+    }
+
     public int getTransactionId() {
         return transactionId;
     }
