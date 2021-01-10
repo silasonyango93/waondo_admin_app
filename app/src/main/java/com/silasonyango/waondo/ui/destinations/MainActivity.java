@@ -1,11 +1,26 @@
 package com.silasonyango.waondo.ui.destinations;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.icu.util.Calendar;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.silasonyango.waondo.R;
 import com.silasonyango.waondo.services.retrofit.RetrofitClientInstance;
@@ -29,6 +44,10 @@ public class MainActivity extends AppCompatActivity implements TransactionsListA
     ProgressBar progressBar;
     FloatingActionButton floatingActionButton;
     View noTransactionsPlaceholder;
+    private AlertDialog adMenuDialog;
+    private AlertDialog adSelectDate;
+    private int mYear, mMonth, mDay;
+    private String selectedTransactionDate = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,13 +61,16 @@ public class MainActivity extends AppCompatActivity implements TransactionsListA
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                inflateMenuModal();
             }
         });
         fetchTransactionsByDate(Util.getToday());
     }
 
     public void fetchTransactionsByDate(String transactionsDate) {
+        transactionsListView.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
+        noTransactionsPlaceholder.setVisibility(View.GONE);
         TransactionsRepository transactionsRepository = RetrofitClientInstance.getRetrofitInstance(EndPoints.BASE_URL).create(TransactionsRepository.class);
         Call<List<TransactionsResponseDto>> call = transactionsRepository.fetchTransactionsByDate(new TransactionsByDateRequestDto(transactionsDate));
         call.enqueue(new Callback<List<TransactionsResponseDto>>() {
@@ -110,6 +132,97 @@ public class MainActivity extends AppCompatActivity implements TransactionsListA
                 System.out.println();
             }
         });
+    }
+
+    public void inflateMenuModal() {
+        LayoutInflater inflater = (LayoutInflater)getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View inflatedView = inflater.inflate(R.layout.query_criteria_menu_layout, null);
+        View selectDateViewItem = inflatedView.findViewById(R.id.select_date);
+
+        selectDateViewItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                adMenuDialog.cancel();
+                inflateSelectDateModal();
+            }
+        });
+        openMenuModal(inflatedView);
+    }
+
+    public void openMenuModal(View v) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setView(v);
+        builder.setCancelable(true);
+        adMenuDialog = builder.create();
+        adMenuDialog.setCancelable(true);
+        adMenuDialog.setCanceledOnTouchOutside(true);
+        adMenuDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialogBottom(adMenuDialog);
+        adMenuDialog.show();
+        Window window = adMenuDialog.getWindow();
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+    }
+
+    public void dialogBottom(Dialog dialog){
+        Window window = dialog.getWindow();
+        WindowManager.LayoutParams wlp = window.getAttributes();
+        wlp.gravity = Gravity.BOTTOM;
+        window.setAttributes(wlp);
+    }
+
+
+    public void inflateSelectDateModal() {
+        LayoutInflater inflater = (LayoutInflater)getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View inflatedView = inflater.inflate(R.layout.select_date_configurer_layout, null);
+        View dateSection = inflatedView.findViewById(R.id.calendar_section);
+        TextView tvTransactionDate = inflatedView.findViewById(R.id.transaction_date);
+        TextView tvSubmitButton = inflatedView.findViewById(R.id.btn_submit);
+
+        dateSection.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onClick(View view) {
+                final Calendar c = Calendar.getInstance();
+                mYear = c.get(Calendar.YEAR);
+                mMonth = c.get(Calendar.MONTH);
+                mDay = c.get(Calendar.DAY_OF_MONTH);
+
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(MainActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                selectedTransactionDate = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
+                                tvTransactionDate.setText(Util.convertToUserFriendlyDate(selectedTransactionDate,"yyyy-MM-dd"));
+                            }
+                        }, mYear, mMonth, mDay);
+                datePickerDialog.show();
+            }
+        });
+
+        tvSubmitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                adSelectDate.cancel();
+                fetchTransactionsByDate(selectedTransactionDate);
+            }
+        });
+        openSelectDateModal(inflatedView);
+    }
+
+    public void openSelectDateModal(View v) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setView(v);
+        builder.setCancelable(true);
+        adSelectDate = builder.create();
+        adSelectDate.setCancelable(true);
+        adSelectDate.setCanceledOnTouchOutside(true);
+        adSelectDate.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        adSelectDate.show();
+        Window window = adSelectDate.getWindow();
+        window.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
     }
 
     @Override
