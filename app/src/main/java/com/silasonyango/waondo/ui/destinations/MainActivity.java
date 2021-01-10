@@ -48,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements TransactionsListA
     private AlertDialog adSelectDate;
     private int mYear, mMonth, mDay;
     private String selectedTransactionDate = null;
+    private String startDate = null;
+    private String endDate = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -119,12 +121,47 @@ public class MainActivity extends AppCompatActivity implements TransactionsListA
     }
 
     public void fetchTransactionsByDateRange(String transactionsStartDate, String transactionsEndDate) {
+        transactionsListView.setVisibility(View.GONE);
+        progressBar.setVisibility(View.VISIBLE);
+        noTransactionsPlaceholder.setVisibility(View.GONE);
         TransactionsRepository transactionsRepository = RetrofitClientInstance.getRetrofitInstance(EndPoints.BASE_URL).create(TransactionsRepository.class);
         Call<List<TransactionsResponseDto>> call = transactionsRepository.fetchTransactionsByDateRange(new TransactionsByDateRangeRequestDto(transactionsStartDate,transactionsEndDate));
         call.enqueue(new Callback<List<TransactionsResponseDto>>() {
             @Override
             public void onResponse(Call<List<TransactionsResponseDto>> call, retrofit2.Response<List<TransactionsResponseDto>> response) {
-                System.out.println();
+                if (response.isSuccessful() && response.code() == 200) {
+                    if (response.body().size() > 0) {
+                        List<TransactionsItemModel> transactionsItemModelList = new ArrayList<>();
+                        for (TransactionsResponseDto transactionsResponseDto : response.body()) {
+                            transactionsItemModelList.add(new TransactionsItemModel(
+                                    R.drawable.ic_credit_icon,
+                                    transactionsResponseDto.getTransactionId(),
+                                    transactionsResponseDto.getStudentId(),
+                                    transactionsResponseDto.getTransactionDescription(),
+                                    transactionsResponseDto.getPreviousTermBalance(),
+                                    transactionsResponseDto.getPreviousAnnualBalance(),
+                                    transactionsResponseDto.getPreviousTotal(),
+                                    transactionsResponseDto.getNextTermBalance(),
+                                    transactionsResponseDto.getNextAnnualBalance(),
+                                    transactionsResponseDto.getNextTotal(),
+                                    transactionsResponseDto.getTransactionDate(),
+                                    transactionsResponseDto.getStaff(),
+                                    transactionsResponseDto.getStudentName(),
+                                    transactionsResponseDto.getInstallmentAmount(),
+                                    transactionsResponseDto.getCarryForwardAmount()
+                            ));
+                        }
+                        TransactionsListAdapter transactionsListAdapter = new TransactionsListAdapter(getBaseContext(),R.layout.transaction_item,transactionsItemModelList, MainActivity.this);
+                        transactionsListView.setAdapter(transactionsListAdapter);
+                        transactionsListView.setVisibility(View.VISIBLE);
+                        progressBar.setVisibility(View.GONE);
+                        noTransactionsPlaceholder.setVisibility(View.GONE);
+                    } else {
+                        transactionsListView.setVisibility(View.GONE);
+                        progressBar.setVisibility(View.GONE);
+                        noTransactionsPlaceholder.setVisibility(View.VISIBLE);
+                    }
+                }
             }
 
             @Override
@@ -138,12 +175,21 @@ public class MainActivity extends AppCompatActivity implements TransactionsListA
         LayoutInflater inflater = (LayoutInflater)getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View inflatedView = inflater.inflate(R.layout.query_criteria_menu_layout, null);
         View selectDateViewItem = inflatedView.findViewById(R.id.select_date);
+        View selectDateRangeViewItem = inflatedView.findViewById(R.id.select_date_range);
 
         selectDateViewItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 adMenuDialog.cancel();
                 inflateSelectDateModal();
+            }
+        });
+
+        selectDateRangeViewItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                adMenuDialog.cancel();
+                inflateSelectDateRangeModal();
             }
         });
         openMenuModal(inflatedView);
@@ -213,6 +259,89 @@ public class MainActivity extends AppCompatActivity implements TransactionsListA
     }
 
     public void openSelectDateModal(View v) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setView(v);
+        builder.setCancelable(true);
+        adSelectDate = builder.create();
+        adSelectDate.setCancelable(true);
+        adSelectDate.setCanceledOnTouchOutside(true);
+        adSelectDate.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        adSelectDate.show();
+        Window window = adSelectDate.getWindow();
+        window.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
+    }
+
+
+    public void inflateSelectDateRangeModal() {
+        LayoutInflater inflater = (LayoutInflater)getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View inflatedView = inflater.inflate(R.layout.date_range_configurer_layout, null);
+        View startDateSection = inflatedView.findViewById(R.id.start_date_section);
+        TextView tvStartDate = inflatedView.findViewById(R.id.start_date);
+
+        View endDateSection = inflatedView.findViewById(R.id.end_date_section);
+        TextView tvEndDate = inflatedView.findViewById(R.id.end_date);
+        TextView tvSubmitButton = inflatedView.findViewById(R.id.btn_submit);
+
+        startDateSection.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onClick(View view) {
+                final Calendar c = Calendar.getInstance();
+                mYear = c.get(Calendar.YEAR);
+                mMonth = c.get(Calendar.MONTH);
+                mDay = c.get(Calendar.DAY_OF_MONTH);
+
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(MainActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                startDate = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
+                                tvStartDate.setText(Util.convertToUserFriendlyDate(startDate,"yyyy-MM-dd"));
+                            }
+                        }, mYear, mMonth, mDay);
+                datePickerDialog.show();
+            }
+        });
+
+
+        endDateSection.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onClick(View view) {
+                final Calendar c = Calendar.getInstance();
+                mYear = c.get(Calendar.YEAR);
+                mMonth = c.get(Calendar.MONTH);
+                mDay = c.get(Calendar.DAY_OF_MONTH);
+
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(MainActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                endDate = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
+                                tvEndDate.setText(Util.convertToUserFriendlyDate(endDate,"yyyy-MM-dd"));
+                            }
+                        }, mYear, mMonth, mDay);
+                datePickerDialog.show();
+            }
+        });
+
+        tvSubmitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                adSelectDate.cancel();
+                fetchTransactionsByDateRange(startDate,endDate);
+            }
+        });
+        openSelectDateRangeModal(inflatedView);
+    }
+
+    public void openSelectDateRangeModal(View v) {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setView(v);
         builder.setCancelable(true);

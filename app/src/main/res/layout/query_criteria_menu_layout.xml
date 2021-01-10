@@ -82,7 +82,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/pesa_link_to_bank"
+        android:id="@+id/select_date_range"
         android:orientation="vertical"
         android:clickable="true"
         android:focusable="true"
